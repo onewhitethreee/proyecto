@@ -1,6 +1,4 @@
 from openpyxl import Workbook
-
-from openpyxl import Workbook
 import time
 
 book = Workbook()
@@ -13,4 +11,4 @@ for i in range(3, 23):
     now = time.strftime("%x")
     sheet['C1'] = now
 
-    book.save("libro/sample.xlsx")
+    book.save("libro/literatura.xlsx")
