@@ -51,7 +51,6 @@ int buscarUnLibroISBN()
 }
 int buscarUnLibroGenero()
 {
-    char genero[20];
     printf("Has seleccionado buscar un libro por genero\n");
     printf("introduce el genero del libro\n");
     /*这里出现几个选项让用户选*/
