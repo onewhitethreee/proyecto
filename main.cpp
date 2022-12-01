@@ -23,6 +23,10 @@ int crearUnaCuenta()
     return 0;
 }
 
+int login(){
+    return 0;
+}
+
 int buscarUnLibroNombre()
 {
     char nombre[20];
