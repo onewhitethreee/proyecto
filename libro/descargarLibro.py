@@ -1,9 +1,8 @@
 import requests
 from lxml import etree
 import time
-import pandas
 import openpyxl as op
-
+import os
 
 
 def header():
@@ -13,6 +12,8 @@ def header():
     }
     return header
 
+book = op.Workbook()
+sheet = book.active
 
 def descargarLibro(url, header):
     url_original = 'https://www.casadellibro.com'
@@ -26,7 +27,7 @@ def descargarLibro(url, header):
         )  #url de los libros
         new_url = url_original + href_url[0]
         new_url_html = requests.get(new_url, headers=header).text
-        time.sleep(1)
+        #time.sleep(1)
         new_selector = etree.HTML(new_url_html)
         title = new_selector.xpath(
             'string(/html/body/div[1]/div/div/div[1]/main/div/div/div/div[3]/div/div[2]/div/h1/text())'
@@ -37,19 +38,28 @@ def descargarLibro(url, header):
         iSBN = new_selector.xpath(
             'string(/html/body/div[1]/div/div/div[1]/main/div/div/div/div[3]/div/div[2]/div/div[2]/div[1]/span[2])'
         )  #ISBN del libro
-        print('the title is: ', title)
-        print('the author is: ', author)
-        print('the ISBN is: ', iSBN)
+        print(title, author, iSBN)
+        # sheet[f'A{i}'] = title
+        # sheet[f'B{i}'] = author
+        # sheet[f'C{i}'] = iSBN
+        # book.save("libro/literatura.xlsx")
+        #追加写入
+        sheet.append([title, author, iSBN])
+        book.save("libro/infantil.xlsx")
 
 
 if __name__ == "__main__":
     header = header()
-    for i in range(3, 100):
-        print(f'pagina {i}')
-        url = f"https://www.casadellibro.com/ebooks/novela-contemporanea/narrativa-espanola/128007000/p{i}"  #literatura
-        descargarLibro(url, header)
-        time.sleep(2)
-    #url = 'https://www.casadellibro.com/ebooks/autoayuda-y-espiritualidad/102000000'#ciencia
+    try:
+        for i in range(3, 100):
+            print(f'pagina {i}')
+            url = f'https://www.casadellibro.com/ebooks/infantil/infantil-5-a-6-anos/117004000/p{i}' #infantil
+            descargarLibro(url, header)
+            time.sleep(1)
+
+    except Exception as e:
+        print(e)
+        #url = 'https://www.casadellibro.com/ebooks/autoayuda-y-espiritualidad/102000000'#ciencia
     #url = 'https://www.casadellibro.com/ebooks/historia/115000000'#historia, politicay sociologia
     #url = 'https://www.casadellibro.com/ebooks/salud-y-dietas/medicina-divulgativa/131006000 ciencia
     #url = 'https://www.casadellibro.com/ebooks/empresa/111000000' empresa

@@ -144,7 +144,7 @@ int main()
             printf("Saliendo de sistema....\n");
             /*加一个定时器来延迟退出*/
         }
+        
     } while (seleccion == false);
-
     return 0;
 }
