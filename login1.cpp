@@ -74,10 +74,10 @@ void User::Register()
                 printf("el nombre de usuario ya existe, introduce otro nombre de usuario: ");
                 goto hre;
             }
-        }user[i].accout = accout;
+        }
+        user[i].accout = accout;
         string pword;
         char ch, passwords[20];
         int x = 0;
-        
     }
 }

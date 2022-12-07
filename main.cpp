@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "login.h"
+
 
 int crearUnaCuenta()
 {
@@ -24,7 +26,7 @@ int crearUnaCuenta()
 }
 
 int login(){
-    return 0;
+    login1();
 }
 
 int buscarUnLibroNombre()
@@ -89,6 +91,7 @@ int verLibroPrestado()
 }
 
 int main()
+
 {
     int opcion;
     bool seleccion = true;
