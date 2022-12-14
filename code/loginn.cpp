@@ -16,7 +16,7 @@ void main_login()
     scanf("%d", &cuenta);
     printf("Introduzca su contrasena: ");
     scanf("%d", &contrasena);
-    system("cls");
+    system("clear");
 
     char s[100];
     FILE *fp;
@@ -37,13 +37,13 @@ void main_login()
         {
             printf("Has iniciado sesion!\n");
             system("pause");
-            system("cls");
+            system("clear");
         }
         else
         {
             printf("Cuenta o contrasena incorrecta\n");
             system("pause");
-            system("cls");
+            system("clear");
         }
         fclose(fp); // cerrar archivo user.txt
     }
@@ -58,7 +58,7 @@ void main_register()
     printf("2. Salir\n");
     printf("seleccione una opcion: ");
     scanf("%d", &opcion);
-    system("cls");
+    system("clear");
     switch (opcion)
     {
     case 1: // 会造成用户名重复
@@ -71,10 +71,10 @@ void main_register()
         ofile << accout << endl;
         ofile << password << endl;
         ofile.close();
-        system("cls");
+        system("clear");
         printf("Has creado una cuenta!\n");
         system("pause");
-        system("cls");
+        system("clear");
         main_register();
         break;
     case 2:

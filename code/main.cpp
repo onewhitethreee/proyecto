@@ -19,7 +19,7 @@ int main()
     ptr_bienvenido();
     int opcion;
     scanf("%d", &opcion);
-    system("cls");
+    system("clear");
     //如果是字母，会一直循环
     //这里有一个循环问题
     //全部都要写上回到主函数的语句
