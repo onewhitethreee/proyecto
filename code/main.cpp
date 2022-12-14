@@ -22,7 +22,7 @@ int main()
     system("cls");
     //如果是字母，会一直循环
     //这里有一个循环问题
-//全部都要写上回到主函数的语句
+    //全部都要写上回到主函数的语句
     switch (opcion)
     {
     case 1:
@@ -31,6 +31,7 @@ int main()
         break;
     case 2:
         main_login();
+        main();//volver a funcion main
         break;
     case 3:
         buscarUnLibroNombre();
@@ -59,6 +60,8 @@ int main()
         break;
     default:
         printf("Opcion no valida\n");
+        system("pause");
+        main();
         break;
     }
     return 0;

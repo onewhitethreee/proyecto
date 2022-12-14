@@ -3,6 +3,7 @@
     "files.associations": {
         "*.html": "html",
         "*.java": "java",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "sstream": "cpp"
     }
 }

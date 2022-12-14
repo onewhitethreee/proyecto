@@ -1,32 +1,28 @@
-using namespace std;
+#include <fstream>
 #include <iostream>
-#include "iostream"
-#include "fstream"
-#include "string"
-#include "stdio.h"
-#include "stdlib.h"
 
-
-void save()
+int main()
 {
-    int scount = 1;
-    int accout;
-    int password;
-    ofstream ofile;
-    ofile.open("user.txt", ios::out);
-    printf("introduzca su cuenta que quieres registrar: ");
-    scanf("%d", &accout);
-    printf("introduzca su contrasena que quieres registrar: ");
-    scanf("%d", &password);
+    const int BUFFER_SIZE = 4086;
 
-    for (int i = 0; i < scount; i++)
+    // Open the file
+    std::ifstream input_file("ciencia.csv");
+
+    // Check if the file was successfully opened
+    if (!input_file)
     {
-        ofile << accout << endl;
-        ofile << password << endl;
+        std::cerr << "Error: failed to open file\n";
+        return 1;
     }
-    ofile.close();
-}
 
-int main(){
-    save();
+    // Create a buffer to hold each line of the file
+    char buffer[BUFFER_SIZE];
+
+    // Read each line of the file
+    for(int i=0; i<1000; i++){
+        input_file.getline(buffer, BUFFER_SIZE);
+        printf("%s\n", buffer);
+    }/*正则匹配逗号前面的，中间的和后面的。 前面的就是书名，中间的就是作者名，最后的数字就是ISBN*/
+
+    return 0;
 }
