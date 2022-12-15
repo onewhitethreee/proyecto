@@ -4,6 +4,9 @@
         "*.html": "html",
         "*.java": "java",
         "fstream": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "ostream": "cpp",
+        "string": "cpp",
+        "iostream": "cpp"
     }
 }

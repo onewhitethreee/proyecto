@@ -36,7 +36,7 @@ void main_login()
         if (cuenta == atoi(s) && contrasena == atoi(s))
         {
             printf("Has iniciado sesion!\n");
-            system("pause");
+            cin.get();
             system("clear");
         }
         else

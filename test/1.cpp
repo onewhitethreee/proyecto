@@ -1,28 +1,62 @@
-#include <fstream>
 #include <iostream>
+#include <fstream>
+#include <cstring>
+
+using namespace std;
 
 int main()
 {
-    const int BUFFER_SIZE = 4086;
+    // Abre el archivo en modo de lectura
+    ifstream archivo("ciencia.csv");
 
-    // Open the file
-    std::ifstream input_file("ciencia.csv");
-
-    // Check if the file was successfully opened
-    if (!input_file)
+    // Verifica que el archivo se haya abierto correctamente
+    if (!archivo.is_open())
     {
-        std::cerr << "Error: failed to open file\n";
+        cerr << "Error al abrir el archivo" << endl;
         return 1;
     }
 
-    // Create a buffer to hold each line of the file
-    char buffer[BUFFER_SIZE];
+    // Define un arreglo de caracteres para almacenar el registro
+    const int LONGITUD_MAXIMA_LINEA = 1024;
+    const int NUMERO_MAXIMO_LINEAS = 100;
+    char registro[NUMERO_MAXIMO_LINEAS][LONGITUD_MAXIMA_LINEA];
 
-    // Read each line of the file
-    for(int i=0; i<1000; i++){
-        input_file.getline(buffer, BUFFER_SIZE);
-        printf("%s\n", buffer);
-    }/*正则匹配逗号前面的，中间的和后面的。 前面的就是书名，中间的就是作者名，最后的数字就是ISBN*/
+    // Contador para llevar el número de líneas leídas
+    int contador = 0;
+
+    // Lee cada línea del archivo y la agrega al registro
+    char linea[LONGITUD_MAXIMA_LINEA];
+    while (contador < NUMERO_MAXIMO_LINEAS && archivo.getline(linea, LONGITUD_MAXIMA_LINEA))
+    {
+        // Copia la línea leída en el registro
+        strcpy(registro[contador], linea);
+        contador++;
+    }
+
+    // Cierra el archivo
+    archivo.close();
+
+    // Muestra el contenido del registro
+    // for (int i = 0; i < contador; i++)
+    // {
+    //     cout << registro[i] << endl;
+    // }
+
+    // Busca una palabra en el registro
+    string palabra;
+    cout << "Ingrese una palabra: ";
+    cin >> palabra;
+    for (int i = 0; i < contador; i++)
+    {
+        // Busca la palabra en la línea
+        char *posicion = strstr(registro[i], palabra.c_str());
+
+        // Si se encuentra la palabra, la muestra en pantalla
+        if (posicion != nullptr)
+        {
+            cout << registro[i] << "'" << endl;
+        }
+    }
 
     return 0;
 }

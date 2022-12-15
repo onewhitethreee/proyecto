@@ -16,6 +16,7 @@
 
 int main()
 {
+    system("clear");
     ptr_bienvenido();
     int opcion;
     scanf("%d", &opcion);
