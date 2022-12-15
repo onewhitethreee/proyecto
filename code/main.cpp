@@ -16,23 +16,35 @@
 
 int main()
 {
+    bool loginn = false;
     system("clear");
     ptr_bienvenido();
     int opcion;
     scanf("%d", &opcion);
     system("clear");
-    //如果是字母，会一直循环
-    //这里有一个循环问题
-    //全部都要写上回到主函数的语句
+    // 这里有一个循环问题
+    while (getchar() != '\n');// 这里是清空缓冲区，不然会出现循环问题
+    // 全部都要写上回到主函数的语句
     switch (opcion)
     {
     case 1:
         main_register();
-        main();//volver a funcion main
+        main(); // volver a funcion main
         break;
     case 2:
-        main_login();
-        main();//volver a funcion main
+        if (main_login() == true)
+        {
+            printf("Has iniciado sesion\n");
+            loginn = true;
+            system("pause");
+            main();
+        }
+        else
+        {
+            printf("Has introducido mal la cuenta o la contrasena\n");
+            system("read -p 'Press Enter to continue...' var");
+            main();
+        }
         break;
     case 3:
         buscarUnLibroNombre();
@@ -50,7 +62,7 @@ int main()
         hacerPrestamoDeLibro();
         break;
     case 8:
-        devolverUnLibro();
+        printf("Has seleccionado devolver un libro\n");
         break;
     case 9:
         verLibroPrestado();
@@ -67,3 +79,4 @@ int main()
     }
     return 0;
 }
+/*12.15 19.27 /*解决了scanf获取非法字符的错误，解决了死循环，但是在linux下会一跳而过，要加上一个pause，解决了login和register，应该不会有错误了，要在main加入个状态判断，不然的话其他功能会用不了，会多次要求输入账号密码，在login还是会有一个scanf错误，你需要解决它*/
