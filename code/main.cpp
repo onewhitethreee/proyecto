@@ -25,10 +25,10 @@ bool loginss()
     char fileUsername[100], filePassword[100];
     while (file >> fileUsername >> filePassword)
     {
-        if (strcmp(fileUsername, username) == 0)//compare the username
-            if (strcmp(filePassword, password) == 0)//compare the password
+        if (strcmp(fileUsername, username) == 0)     // compare the username
+            if (strcmp(filePassword, password) == 0) // compare the password
             {
-                printf("Bienvenido %s\n", username);//si el usuario y la contrasena son correctos
+                printf("Bienvenido %s\n", username); // si el usuario y la contrasena son correctos
                 return true;
             }
             else
@@ -42,6 +42,9 @@ bool loginss()
 
 int main()
 {
+    char libro[100];
+    char fileName[100];
+    char newName[100] = "UserLibroPrestado_";
 
     system("clear");
     ptr_bienvenido();
@@ -82,9 +85,26 @@ int main()
         buscarUnLibroGenero(); // 在这个函数里面有一加一个延迟
         break;
     case 7:
-        if(loginss()==true)
+        if (loginss() == true)
         {
-            hacerPrestamoDeLibro();
+
+            std::cout << "Introduce tu tu cuenta para hacer el prestamo: ";
+            std::cin >> fileName;
+            strcat(newName, fileName);
+            strcat(newName, ".txt");//sumar el nombre del archivo
+            std::ofstream file(newName);
+            if (file.is_open())
+            {
+                // prestamo de libro
+                // preguntares el ISBN, autor, nombre o genero del libro para hacer el prestamo
+                // si el usuario introduce el ISBN, autor, nombre o genero del libro para hacer el prestamo
+                cout << "Introduce el ISBN, autor, nombre o genero del libro para hacer el prestamo:";
+                cin >> libro;
+
+                file << libro << std::endl;
+                file.close();
+                hacerPrestamoDeLibro();
+            }
         }
         else
         {
@@ -93,9 +113,23 @@ int main()
         }
         break;
     case 8:
-        if(loginss()==true)
+        if (loginss() == true)
         {
-            devolverUnLibro();
+            std::cout << "Introduce tu cuenta para hacer devolver el libro: ";
+            std::cin >> fileName;
+            strcat(newName, fileName);
+            strcat(newName, ".txt");
+            std::ofstream file(newName);
+            /*好像会一直卡在创建文件，按照只读方法来进行读取，然后删除*/
+            if(file.is_open())
+            {
+                // devolver el libro
+                //muestra el libro prestado del usuario
+                cout << "Tienes estos libros para devolver: " << endl;
+                file.close();
+                devolverUnLibro();
+            }
+            
         }
         else
         {
@@ -104,7 +138,7 @@ int main()
         }
         break;
     case 9:
-        if(loginss()==true)
+        if (loginss() == true)
         {
             verLibroPrestado();
         }
@@ -129,3 +163,4 @@ int main()
 }
 
 /*在出书的时候延迟一点点，判断用户有没有登录已经写好了，现在要写的就是完成那三个funciones*/
+/*123 line*/
