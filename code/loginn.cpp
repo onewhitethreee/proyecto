@@ -7,19 +7,6 @@ using namespace std;
 #include "string.h"
 #include <cstring>
 
-bool login(char username[], char password[])
-{
-    ifstream file("user.txt");
-    if (!file.is_open())
-        return false;
-    char fileUsername[100], filePassword[100];
-    while (file >> fileUsername >> filePassword)
-    {
-        if (strcmp(fileUsername, username) == 0)
-            return strcmp(filePassword, password) == 0;
-    }
-    return false;
-}
 
 void main_register()
 {
