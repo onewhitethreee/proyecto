@@ -1,8 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <fstream>
+#include <cstring>
 
-int buscarLibroPorAutorNombreISBN()
+using namespace std;
+int main()
 {
     ifstream archivo("../libro/todoLibro.csv");
 
@@ -21,7 +22,7 @@ int buscarLibroPorAutorNombreISBN()
     char linea[LONGITUD_MAXIMA_LINEA];
     while (contador < NUMERO_MAXIMO_LINEAS && archivo.getline(linea, LONGITUD_MAXIMA_LINEA))
     {
-        strcpy(registro[contador], linea);
+            strcpy(registro[contador], linea);
         contador++;
     }
 
@@ -29,8 +30,7 @@ int buscarLibroPorAutorNombreISBN()
 
     for (int i = 0; i < contador; i++)
     {
-        //cout << registro[i] << endl;
-        ;
+        cout << registro[i] << endl;
     }
 
     // definir un char para buscar la palabra

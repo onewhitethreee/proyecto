@@ -4,26 +4,25 @@
 /*cabezadas de las funciones*/
 
 #include "loginn.cpp"               //funcion de login y registro
-#include "buscarUnLibroNombre.cpp"  //funcion de buscar un libro por nombre
-#include "buscarUnLibroAutor.cpp"   //funcion de buscar un libro por autor
-#include "buscarUnLibroISBN.cpp"    //funcion de buscar un libro por ISBN
 #include "buscarUnLibroGenero.cpp"  //funcion de buscar un libro por genero
 #include "hacerPrestamoDeLibro.cpp" //funcion de hacer prestamo de un libro
 #include "devolverUnLibro.cpp"      //funcion de devolver un libro
 #include "verLibroPrestado.cpp"     //funcion de ver libro prestado
 #include "bienvenido.cpp"           //funcion de bienvenido
+#include "buscarLirpoPorAutorNombreISBN.cpp"  //funcion de buscar un libro por nombre
 /**/
 
 int main()
 {
-    bool loginn = false;
+
     system("clear");
     ptr_bienvenido();
     int opcion;
     scanf("%d", &opcion);
     system("clear");
     // 这里有一个循环问题
-    while (getchar() != '\n');// 这里是清空缓冲区，不然会出现循环问题
+    while (getchar() != '\n')
+        ; // 这里是清空缓冲区，不然会出现循环问题
     // 全部都要写上回到主函数的语句
     switch (opcion)
     {
@@ -32,37 +31,42 @@ int main()
         main(); // volver a funcion main
         break;
     case 2:
-        if (main_login() == true)
+        char username[100], password[100];
+        printf("Introduzca su cuenta: ");
+        scanf("%s", username);
+        printf("Introduzca su contrasena: ");
+        scanf("%s", password);
+        if (main_login(username, password))
         {
-            printf("Has iniciado sesion\n");
-            loginn = true;
-            system("pause");
-            main();
+            printf("Bienvenido %s\n", username);
+            // system("pause");
+            system("read -p 'Press Enter to continue...' var");
+            main(); // volver a funcion main
         }
         else
         {
-            printf("Has introducido mal la cuenta o la contrasena\n");
-            system("read -p 'Press Enter to continue...' var");
+            printf("Cuenta o contrasena incorrecta\n");
+            system("pause");
             main();
         }
         break;
     case 3:
-        buscarUnLibroNombre();
+        buscarLibroPorAutorNombreISBN();
         break;
     case 4:
-        buscarUnLibroAutor();
+        buscarLibroPorAutorNombreISBN();
         break;
     case 5:
-        buscarUnLibroISBN();
+        buscarLibroPorAutorNombreISBN();
         break;
     case 6:
-        buscarUnLibroGenero();
+        buscarUnLibroGenero();//在这个函数里面有一加一个延迟
         break;
     case 7:
         hacerPrestamoDeLibro();
         break;
     case 8:
-        printf("Has seleccionado devolver un libro\n");
+        devolverUnLibro();
         break;
     case 9:
         verLibroPrestado();
@@ -73,10 +77,10 @@ int main()
         break;
     default:
         printf("Opcion no valida\n");
-        system("pause");
+        // 替换为linux的pause
+        system("read -p 'Press Enter to continue...' var");
         main();
         break;
     }
     return 0;
 }
-/*12.15 19.27 /*解决了scanf获取非法字符的错误，解决了死循环，但是在linux下会一跳而过，要加上一个pause，解决了login和register，应该不会有错误了，要在main加入个状态判断，不然的话其他功能会用不了，会多次要求输入账号密码，在login还是会有一个scanf错误，你需要解决它*/

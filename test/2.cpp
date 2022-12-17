@@ -1,53 +1,51 @@
-#include "iostream"
-#include "fstream"
-#include "string"
-#include <conio.h>
+#include <fstream>
 #include <cstring>
+#include <iostream>
 
 using namespace std;
+
+const int MAX_LENGTH = 100; // Longitud m¨¢xima de los nombres de usuario y contrase?as
+
+bool login(char username[], char password[])
+{
+    // Abrimos el archivo de texto
+    ifstream file("user.txt");
+
+    // Si el archivo no se puede abrir, devuelve false
+    if (!file.is_open())
+        return false;
+
+    // Inicializamos las variables para almacenar los datos del archivo
+    char fileUsername[MAX_LENGTH], filePassword[MAX_LENGTH];
+
+    // Iteramos sobre cada l¨ªnea del archivo
+    while (file >> fileUsername >> filePassword)
+    {
+        // Si encontramos una l¨ªnea que coincide con el nombre de usuario dado,
+        // verificamos si la contrase?a coincide con la contrase?a en la l¨ªnea siguiente
+        if (strcmp(fileUsername, username) == 0)
+            return strcmp(filePassword, password) == 0;
+    }
+
+    // Si no se encontr¨® una coincidencia, devuelve false
+    return false;
+}
+
 int main()
 {
-    int cuentas;
-    int contrasenas;
-    int contador = 0;
-    const int LONGITUD_MAXIMA_LINEA = 1024;
-    const int NUMERO_MAXIMO_LINEAS = 100;
-    char registro[NUMERO_MAXIMO_LINEAS][LONGITUD_MAXIMA_LINEA];
-    ifstream archivo("user.txt");
-    if (!archivo.is_open())
+    // Prueba la funci¨®n de inicio de sesi¨®n
+    char username[MAX_LENGTH] = "112233";
+    char password[MAX_LENGTH] = "11223344";
+    bool success = login(username, password);
+
+    if (success)
     {
-        cerr << "Error al abrir el archivo" << endl; // mostrar el error
-        return 1;                                    // salir del programa
+        cout << "Inicio de sesi¨®n exitoso" << endl;
     }
-    // leer el archivo
-    char linea[100];
-    // 1ÎªÕËºÅ£¬2ÎªÃÜÂë£¬3ÎªÕËºÅ£¬4ÎªÃÜÂë
-    while (archivo.getline(linea, 100)) // hasta 100 caracteres
+    else
     {
-        strcpy(registro[contador], linea);
-        contador++;
+        cout << "Error de inicio de sesi¨®n" << endl;
     }
-    //cout << contador << endl;//4
-    //cout << registro[3] << endl;
-    scanf("%d", &cuentas);
-    scanf("%d", &contrasenas);
-    for (int i = 0; i < contador; i++)
-    {//?????????????????????1234 ????????????????????1234?????????
-        int k = 1;//login??????????
-        if (i % 2 == 0)//???????
-        {
-            k++;
-            printf("dasd");
-            if (cuentas == atoi(registro[k]) && contrasenas == atoi(registro[k+1]))
-            {
-                cout << "Has iniciado sesion" << endl;
-                break;
-            }
-        }
-        else
-        {
-            cout << "Has introducido mal la cuenta o la contrasena" << endl;
-            break;
-        }
-    }
+
+    return 0;
 }
