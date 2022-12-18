@@ -1,13 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <fstream>
+#include <cstring>
+using namespace std;
+#include <unistd.h> //sleep
+
 /*cabezadas de las funciones*/
 
 #include "loginn.cpp"                        //funcion de login y registro
 #include "buscarUnLibroGenero.cpp"           //funcion de buscar un libro por genero
 #include "hacerPrestamoDeLibro.cpp"          //funcion de hacer prestamo de un libro
 #include "devolverUnLibro.cpp"               //funcion de devolver un libro
-#include "verLibroPrestado.cpp"              //funcion de ver libro prestado
 #include "bienvenido.cpp"                    //funcion de bienvenido
 #include "buscarLirpoPorAutorNombreISBN.cpp" //funcion de buscar un libro por nombre
 /**/
@@ -17,7 +19,11 @@ bool loginss()
     char username[100], password[100];
     printf("Introduzca su cuenta: ");
     scanf("%s", username);
+    sleep(1);
+    printf("comprobando la cuenta...\n");
     printf("Introduzca su contrasena: ");
+    sleep(1);
+    printf("comprobando la contrasena...\n")
     scanf("%s", password);
     ifstream file("user.txt");
     if (!file.is_open())
@@ -28,6 +34,7 @@ bool loginss()
         if (strcmp(fileUsername, username) == 0)     // compare the username
             if (strcmp(filePassword, password) == 0) // compare the password
             {
+                sleep(3);
                 printf("Bienvenido %s\n", username); // si el usuario y la contrasena son correctos
                 return true;
             }
@@ -47,11 +54,13 @@ int main()
     char newName[100] = "UserLibroPrestado_";
 
     system("clear");
+    sleep(1);
+    printf("Entrando al sistema...\n");
+    sleep(1);
     ptr_bienvenido();
     int opcion;
     scanf("%d", &opcion);
     system("clear");
-    // 这里有一个循环问题
     while (getchar() != '\n')
         ; // 这里是清空缓冲区，不然会出现循环问题
     // 全部都要写上回到主函数的语句
@@ -59,12 +68,14 @@ int main()
     {
     case 1:
         main_register();
+        sleep(1);
         main(); // volver a funcion main
         break;
     case 2:
         if (loginss() == true)
         {
             printf("Bienvenido\n");
+            sleep(1);
             main();
         }
         else
@@ -74,15 +85,27 @@ int main()
         }
     case 3:
         buscarLibroPorAutorNombreISBN();
+        sleep(2);
+        system("read -p 'Press Enter to continue...' var");
+        main();
         break;
     case 4:
         buscarLibroPorAutorNombreISBN();
+        sleep(2);
+        system("read -p 'Press Enter to continue...' var");
+        main();
         break;
     case 5:
         buscarLibroPorAutorNombreISBN();
+        sleep(2);
+        system("read -p 'Press Enter to continue...' var");
+        main();
         break;
     case 6:
-        buscarUnLibroGenero(); // 在这个函数里面有一加一个延迟
+        buscarUnLibroGenero();
+        sleep(2);
+        system("read -p 'Press Enter to continue...' var");
+        main();
         break;
     case 7:
         if (loginss() == true)
@@ -91,7 +114,7 @@ int main()
             std::cout << "Introduce tu tu cuenta para hacer el prestamo: ";
             std::cin >> fileName;
             strcat(newName, fileName);
-            strcat(newName, ".txt");//sumar el nombre del archivo
+            strcat(newName, ".txt"); // sumar el nombre del archivo
             std::ofstream file(newName);
             if (file.is_open())
             {
@@ -104,6 +127,10 @@ int main()
                 file << libro << std::endl;
                 file.close();
                 hacerPrestamoDeLibro();
+                sleep(2);
+                printf("Prestamo de libro exitoso\n");
+                sleep(2);
+                system("read -p 'Press Enter to continue...' var");
             }
         }
         else
@@ -115,22 +142,11 @@ int main()
     case 8:
         if (loginss() == true)
         {
-            std::cout << "Introduce tu cuenta para hacer devolver el libro: ";
-            std::cin >> fileName;
-            strcat(newName, fileName);
-            strcat(newName, ".txt");
-            std::ofstream file(newName);
-            /*好像会一直卡在创建文件，按照只读方法来进行读取，然后删除*/
-            if(file.is_open())
-            {
-                // devolver el libro
-                //muestra el libro prestado del usuario
-                cout << "Tienes estos libros para devolver: " << endl;
-                file.close();
-                devolverUnLibro();
-            }
-            
+            sleep(1);
+            devolverUnLibro(); // falta funcion
+            main();
         }
+
         else
         {
             printf("No tienes acceso debido mal cuenta o contraseña\n");
@@ -140,7 +156,31 @@ int main()
     case 9:
         if (loginss() == true)
         {
-            verLibroPrestado();
+            char nombreArchivo[256];
+
+            cout << "Ingrese tu cuenta para ver tu libro prestado: ";
+            scanf("%s", nombreArchivo);
+            // cin.getline(nombreArchivo);
+            char nombreInvariable[100] = "UserLibroPrestado_";
+            strcat(nombreInvariable, nombreArchivo);
+            strcat(nombreInvariable, ".txt");
+            ifstream archivo(nombreInvariable);
+            if (!archivo)
+            {
+                cerr << "No lo tienes libros prestado" << nombreInvariable << endl;
+                return 1;
+            }
+
+            char linea[256];
+            while (archivo.getline(linea, 256))
+            {
+                cout << "Tienes siguientes libros prestado: " << linea << endl;
+                sleep(2);
+                system("read -p 'Press Enter to continue...' var");
+            }
+            archivo.close();
+            main();
+            return 0;
         }
         else
         {
@@ -150,17 +190,15 @@ int main()
         break;
     case 10:
         printf("Has seleccionado salir\n");
-        system("pause");
+        system("read -p 'Press Enter to continue...' var");
         break;
     default:
+        sleep(1);
         printf("Opcion no valida\n");
-        // 替换为linux的pause
+        sleep(1);
         system("read -p 'Press Enter to continue...' var");
         main();
         break;
     }
     return 0;
 }
-
-/*在出书的时候延迟一点点，判断用户有没有登录已经写好了，现在要写的就是完成那三个funciones*/
-/*123 line*/

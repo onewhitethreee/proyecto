@@ -6,6 +6,6 @@
 
 void devolverUnLibro()
 {
-    printf("libro devuelto!\n");
+   
 }
 
