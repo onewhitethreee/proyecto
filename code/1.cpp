@@ -1,8 +1,12 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstring>
+using namespace std;
+#include <unistd.h> //sleep
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-int devolverUnLibro()
+int main()
 {
     char nombreArchivo[256];
     char nombreInvariable[100] = "UserLibroPrestado_";
@@ -38,39 +42,27 @@ int devolverUnLibro()
     {
         printf("%s\n", registro[i]);
     }
-    if (contador == 0)
+
+    char palabra[100];
+    cout << "Ingrese el libro para devolver: ";
+    cin >> palabra;
+    for (int i = 0; i < contador; i++)
     {
-        cout << "No tienes libros prestados" << endl;
-        printf("Volver al menu principal en 5 segundos\n");
-        sleep(5);
-    }
-    else
-    {
-        char palabra[100];
-        cout << "Ingrese el libro para devolver: ";
-        cin >> palabra;
-        for (int i = 0; i < contador; i++)
+        if (strstr(registro[i], palabra) != nullptr) // comparar si la palabra esta en el registro
         {
-            if (strstr(registro[i], palabra) != nullptr) // comparar si la palabra esta en el registro
+            cout << "quieres devolver este libro?: " << registro[i] << endl;
+            char opcion;
+            cout << "Si o No: ";
+            cin >> opcion;
+            if (opcion == 's' || opcion == 'S')
             {
-                cout << "quieres devolver este libro?: " << registro[i] << endl;
-                char opcion;
-                cout << "Si o No: ";
-                cin >> opcion;
-                if (opcion == 's' || opcion == 'S')
-                {
-                    FILE *fp = fopen(nombreInvariable, "w");
-                    truncate(nombreInvariable, 0);
-                    cout << "Se ha devuelto el libro" << endl;
-                }
-                else
-                {
-                    cout << "No se ha devuelto el libro" << endl;
-                }
+                FILE* fp = fopen(nombreInvariable, "w");
+                truncate(nombreInvariable, 0);
+                cout << "Se ha devuelto el libro" << endl;
             }
             else
             {
-                cout << "No se ha encontrado el libro para devolver" << endl;
+                cout << "No se ha devuelto el libro" << endl;
             }
         }
     }

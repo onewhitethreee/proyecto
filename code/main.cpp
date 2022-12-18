@@ -23,8 +23,9 @@ bool loginss()
     printf("comprobando la cuenta...\n");
     printf("Introduzca su contrasena: ");
     sleep(1);
-    printf("comprobando la contrasena...\n")
-    scanf("%s", password);
+    scanf("%s", password);    
+    printf("comprobando la contrasena...\n");
+
     ifstream file("user.txt");
     if (!file.is_open())
         return false;
