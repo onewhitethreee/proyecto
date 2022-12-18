@@ -22,15 +22,16 @@
 PROYECTO
 .
 ├── code
+│   ├── UserLibroPrestado_123456.txt
 │   ├── bienvenido.cpp
 │   ├── buscarLirpoPorAutorNombreISBN.cpp
 │   ├── buscarUnLibroGenero.cpp
 │   ├── devolverUnLibro.cpp
 │   ├── hacerPrestamoDeLibro.cpp
 │   ├── loginn.cpp
+│   ├── main
 │   ├── main.cpp
-│   ├── user.txt
-│   └── verLibroPrestado.cpp
+│   └── user.txt
 ├── libro
 │   ├── ciencia.csv
 │   ├── descargarLibro.py
@@ -40,5 +41,5 @@ PROYECTO
 │   ├── literatura.csv
 │   └── todoLibro.csv
 ├── readme.md
-├── subir.bat
+└── subir.bat
 ```
