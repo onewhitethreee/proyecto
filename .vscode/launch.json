@@ -16,7 +16,7 @@
             "externalConsole": true,   //改为true
             "preLaunchTask": "task g++",    //新增项
             "MIMode": "gdb",
-            "miDebuggerPath": "E:/programa/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/gdb.exe", //MinGW位置
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe", //MinGW位置
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",

@@ -60,7 +60,7 @@ int devolverUnLibro()
                 if (opcion == 's' || opcion == 'S')
                 {
                     FILE *fp = fopen(nombreInvariable, "w");
-                    truncate(nombreInvariable, 0);
+                    //truncate(nombreInvariable, 0);
                     cout << "Se ha devuelto el libro" << endl;
                 }
                 else

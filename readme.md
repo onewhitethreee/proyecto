@@ -17,7 +17,6 @@
 
 **BUSQUEDA DEL LIBRO POR GENERO:** esta funcion se permite que el usuario cuando seleccione, muestra todos los libros que hay en ese genero.
 
-
 ```console
 PROYECTO
 .
@@ -43,3 +42,11 @@ PROYECTO
 ├── readme.md
 └── subir.bat
 ```
+
+
+
+```shell
+./libro/descargarLibro.py
+```
+
+* Es un pequeño script de python para bajar los datos de libros y almacenar en Excel.
